@@ -1,0 +1,146 @@
+version: '3.7'
+services:
+################### rrRemote Container ###################
+  proxy:
+    container_name: proxygateway
+    image: registry.gitlab.com/rrremote/rrremote_proxy_gateway:latest
+    restart: always
+    ports:
+      - 80:80
+
+  graphqlgateway:
+    container_name: graphqlgateway
+    image: registry.gitlab.com/rrremote/rrremote_apollo_gateway:latest
+    restart: always
+    environment:
+      - ENGINE_API_KEY
+      - GOOGLE_APPLICATION_CREDENTIALS
+    expose:
+      - '8080'
+
+################### rrRemote Microservices ###################
+  artistservice:
+    container_name: rrremoteartist
+    image: registry.gitlab.com/rrremote/rrremote_artist_service:latest
+    restart: always
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS
+    expose:
+      - '8080'
+
+  projecttransitionservice:
+    container_name: rrremoteprojecttransition
+    image: registry.gitlab.com/rrremote/rrremote_file_transition_service:latest
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER
+      - RABBITMQ_DEFAULT_PASS
+      - MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY
+      - NODE_ENV=production
+    expose:
+      - '8080'
+    volumes:
+      - /mnt/RRPROJECTS:/mnt/RRPROJECTS
+
+  renderjobservice:
+    container_name: rrremoterenderjob
+    image: registry.gitlab.com/rrremote/rrremote_renderjob_service:latest
+    restart: always
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS
+      - RABBITMQ_DEFAULT_USER
+      - RABBITMQ_DEFAULT_PASS
+      - RRREMOTE_RR_USERNAME
+      - RRREMOTE_RR_SECRET
+      - NODE_ENV=production
+    expose:
+      - '8080'
+    volumes:
+      - /mnt/RR:/mnt/RR
+      - /mnt/RRPROJECTS:/mnt/RRPROJECTS
+
+################### 3rd Party Services ###################
+  minio1:
+    container_name: minio
+    image: minio/minio:RELEASE.2020-02-07T23-28-16Z
+    volumes:
+      - /mnt/RRPROJECTS/MINIO/data1-1:/data1
+      - /mnt/RRPROJECTS/MINIO/data1-2:/data2
+    expose:
+      - '9000'
+    environment:
+      - MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY
+    command: server http://minio{1...4}/data{1...2}
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    restart: always
+
+  minio2:
+    image: minio/minio:RELEASE.2020-02-07T23-28-16Z
+    volumes:
+      - /mnt/RRPROJECTS/MINIO/data2-1:/data1
+      - /mnt/RRPROJECTS/MINIO/data2-2:/data2
+    expose:
+      - '9000'
+    environment:
+      - MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY
+    command: server http://minio{1...4}/data{1...2}
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    restart: always
+
+  minio3:
+    image: minio/minio:RELEASE.2020-02-07T23-28-16Z
+    volumes:
+      - /mnt/RRPROJECTS/MINIO/data3-1:/data1#
+      - /mnt/RRPROJECTS/MINIO/data3-2:/data2
+    expose:
+      - '9000'
+    environment:
+      - MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY
+    command: server http://minio{1...4}/data{1...2}
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    restart: always
+
+  minio4:
+    image: minio/minio:RELEASE.2020-02-07T23-28-16Z
+    volumes:
+      - /mnt/RRPROJECTS/MINIO/data4-1:/data1
+      - /mnt/RRPROJECTS/MINIO/data4-2:/data2
+    expose:
+      - '9000'
+    environment:
+      - MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY
+    command: server http://minio{1...4}/data{1...2}
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    restart: always
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    environment:
+      - RABBITMQ_DEFAULT_USER
+      - RABBITMQ_DEFAULT_PASS

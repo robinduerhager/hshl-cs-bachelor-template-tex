@@ -1,0 +1,30 @@
+extend type Mutation {
+  createRenderjob(title: String!): Storage!
+  submit(renderjobID: ID!): Renderjob!
+  abort(renderjobID: ID!): Renderjob!
+  update(renderjobID: ID!, title: String!): Renderjob!
+}
+
+extend type Query {
+  renderjob(id: ID!): Renderjob!
+}
+
+type Renderjob @key(fields: id) {
+  id: ID!
+  title: String!
+  remainingTime: Int!
+  artist: Artist!
+  status: String!
+  storage: Storage! @provides(fields: bucketName fileName)
+}
+
+extend type Storage @key(fields: bucketName fileName) {
+  bucketName: String! @external
+  fileName: String! @external
+  renderjobID: ID!
+}
+
+extend type Artist @key(fields: uid) {
+  uid: String! @external
+  renderjobs: [Renderjob!]!
+}

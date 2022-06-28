@@ -1,0 +1,8 @@
+query {
+    renderjob(id: ID!){
+        id
+        artist {
+          email
+        }
+    }
+}

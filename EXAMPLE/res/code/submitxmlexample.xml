@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rrJob_submitFile syntax_version="6.0">
+ <DeleteXML>0</DeleteXML>
+ <SubmitterParameter />
+ <Job>
+  <rrSubmitterPluginVersion>v8.2.24-2017</rrSubmitterPluginVersion>
+  <SceneOS>win</SceneOS>
+  <Software>Maya</Software>
+  <Version>2018.0300</Version>
+  <SceneName>[WORKSPACE_PATH]/scenes/test.mb</SceneName>
+  <SceneDatabaseDir>[WORKSPACE_PATH]/</SceneDatabaseDir>
+  <Renderer>arnold</Renderer>
+  <RequiredLicenses />
+  <Camera>camera1</Camera>
+  <Layer>masterLayer</Layer>
+  <Channel>beauty</Channel>
+  <IsActive>True</IsActive>
+  <SeqStart>1</SeqStart>
+  <SeqEnd>48</SeqEnd>
+  <SeqStep>1</SeqStep>
+  <SeqFileOffset>0</SeqFileOffset>
+  <SeqFrameSet />
+  <ImageWidth>960</ImageWidth>
+  <ImageHeight>540</ImageHeight>
+  <ImageDir>[WORKSPACE_PATH]/images/</ImageDir>
+  <ImgFilename>&lt;Layer&gt;/&lt;Channel&gt;/&lt;SceneFile&gt;.</ImgFilename>
+  <ImageExtension>.exr</ImageExtension>
+  <ImagePreNumberLetter>.</ImagePreNumberLetter>
+  <ImageFramePadding>4</ImageFramePadding>
+  <ImageSingleOutputFile>False</ImageSingleOutputFile>
+  <LocalTexturesFile />
+  <rendererVersion>3.0.0.2</rendererVersion>
+ </Job>
+ <Job>
+  <rrSubmitterPluginVersion>v8.2.24-2017</rrSubmitterPluginVersion>
+  <SceneOS>win</SceneOS>
+  <Software>Maya</Software>
+  <Version>2018.0300</Version>
+  <SceneName>[WORKSPACE_PATH]/scenes/test.mb</SceneName>
+  <SceneDatabaseDir>[WORKSPACE_PATH]/</SceneDatabaseDir>
+  <Renderer>arnold</Renderer>
+  <RequiredLicenses />
+  <Camera>camera1</Camera>
+  <Layer>AO</Layer>
+  <Channel>beauty</Channel>
+  <IsActive>True</IsActive>
+  <SeqStart>1</SeqStart>
+  <SeqEnd>48</SeqEnd>
+  <SeqStep>1</SeqStep>
+  <SeqFileOffset>0</SeqFileOffset>
+  <SeqFrameSet />
+  <ImageWidth>960</ImageWidth>
+  <ImageHeight>540</ImageHeight>
+  <ImageDir>[WORKSPACE_PATH]/images/</ImageDir>
+  <ImgFilename>&lt;Layer&gt;/&lt;Channel&gt;/&lt;SceneFile&gt;.</ImgFilename>
+  <ImageExtension>.exr</ImageExtension>
+  <ImagePreNumberLetter>.</ImagePreNumberLetter>
+  <ImageFramePadding>4</ImageFramePadding>
+  <ImageSingleOutputFile>False</ImageSingleOutputFile>
+  <LocalTexturesFile />
+  <rendererVersion>3.0.0.2</rendererVersion>
+ </Job>
+</rrJob_submitFile>

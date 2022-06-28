@@ -1,0 +1,65 @@
+stages:
+    - build
+    #- test
+    - prepare
+    - deploy
+    - update
+
+build:application:
+    stage: build
+    only:
+        - master
+    tags:
+        - docker
+    image: node:$NODE_VERSION-alpine
+    script:
+        - echo $RRREMOTE_FIREBASE_CREDS > fbc.json
+        - npm install
+        - npm run build
+    artifacts:
+        paths:
+            - build/
+            - fbc.json
+        expire_in: 20 minutes
+
+prepare:dockerimage:
+    stage: prepare
+    only:
+        - master
+    tags:
+        - docker
+    image: docker:stable
+    dependencies:
+        - build:application
+    services:
+        - docker:dind
+    before_script:
+        - docker info
+        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    script:
+        - docker build -t $CI_REGISTRY_IMAGE .
+        - docker push $CI_REGISTRY_IMAGE
+
+deploy:artistservice:
+    stage: deploy
+    tags:
+        - internal-shell
+    before_script:
+        - docker info
+        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    script:
+        - cd /home/rrremote
+        - docker-compose pull artistservice
+        - docker-compose up -d --no-deps artistservice
+
+update:schema:
+    stage: update
+    only:
+        - master
+    tags:
+        - docker
+    image: node:$NODE_VERSION-alpine
+    script:
+        - apk add git
+        - npm install -g apollo
+        - apollo service:push --key $ENGINE_API_KEY --localSchemaFile=./src/interfaces/graphql/schema.graphql --serviceName=rrRemoteArtist --serviceURL=http://rrremoteartist:8080/graphql

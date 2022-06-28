@@ -1,0 +1,20 @@
+# SERVER: Queries definition
+type Query {
+  getUserBy(id: ID!): User!
+}
+
+# SERVER: User type definition
+type User {
+  id: ID!
+  name: String!
+  email: String!
+}
+
+# CLIENT: Actual GraphQL Query
+query {
+    getUserBy(id:ID!) {
+        id
+        name
+        email
+    }
+}

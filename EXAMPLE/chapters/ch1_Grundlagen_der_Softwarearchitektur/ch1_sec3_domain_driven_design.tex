@@ -1,0 +1,77 @@
+\section{Domain-Driven-Design}
+\label{sec:domain-driven-design}
+Wie in \autoref{subsec:soa} beschrieben, ist eine der Problematiken von SOA, dass für diesen Architekturstil mehr Wert auf den IT- und weniger auf den Geschäftsbereich gelegt wurde. Demnach konnten nur Systeme entwickelt werden, welche das Geschäft nicht optimal unterstützen konnten. \acrfull{ac-ddd} ist ein von Eric Evans geprägter Entwurfsstil, der die Lücke zwischen IT- und Geschäftsbereich schließen soll. In den nächsten zwei Unterabschnitten dieser Arbeit wird das Konzept von DDD und dessen Komponenten erklärt \parencite[S. 16]{takai2017architektur}.
+
+    \subsection{Konzept}
+    \label{subsec:konzept}
+    Wie der Name \acrfull{ac-ddd} schon sagt, versucht man komplexe Software anhand der Analyse von Geschäftsdomänen zu entwerfen. Software wird entwickelt, damit diese eine \gls{gl-domaene} im Geschäft abdeckt oder einen Geschäftsbereich unterstützt. Zum Entwerfen und Entwickeln dieser Software werden Softwareentwickler benötigt, deren Domäneexpertise allerdings nicht auf den jeweiligen Geschäftsbereich zutrifft, sondern auf die Domäne der Softwareentwicklung. Zusammengefasst sollen also Softwareentwickler oftmals Probleme lösen, die bedingt mit der eigentlichen Domäneexpertise der Entwickler zu tun haben. Daraus entstehen gezwungenermaßen Modelle, die wiederum nicht auf den Geschäftsbereich passen, für welchen die Software entwickelt werden soll. Häufig werden Probleme zu technisch und zu wenig geschäftsabhängig betrachtet, wodurch Software entworfen wird, die zu komplex und unstrukturiert ist. Viele Entwickler haben allerdings auch kein Interesse daran die andere Domäne zu erlernen, um die individuelle Software besser modellieren zu können, da im schlimmsten Fall für jedes Softwareprojekt eine neue Geschäftsdomäne betrachtet und somit wieder erlernt werden muss \parencite[S. 4--6]{evans2004domain}.
+
+    Stattdessen schlägt \gls{ac-ddd} eine Ansammlung von Werkzeugen vor, die mithilfe von Softwareentwicklern und Domäneexperten genutzt werden können, um Domänespezifische Software entwickeln zu können. Diese Werkzeuge sind in den beiden Herangehensweisen \emph{Strategischer Entwurf} (engl. \emph{Strategic-Design}) und \emph{Taktischer Entwurf} (engl. \emph{Tactical-Design}) getrennt. Der \emph{strategische Entwurf} extrahiert durch die Analyse von domänespezifischen, semantischen, strategisch wichtigen Dingen eine Übersicht über die möglichen Anwendungsbereiche der Software in der Geschäftsdomäne. Der \emph{taktische Entwurf} verfasst eine detailliertere, technische Ausprägung davon. Beim Entwerfen von \emph{Domänenmodellen} wird explizit darauf geachtet, dass in diesen geschäftsspezifische Termini wiederzufinden sind \parencites[S. 3]{evans2004domain}{vernon2016domain}.
+
+    \subsection{Komponenten}
+    \label{subsec:komponenten}
+    Zum Entwerfen einer Software mit \gls{ac-ddd} sollten Domäneexperten mit Softwareentwicklern zusammenarbeiten, um eine bestmögliche Software für eine bestimmte \gls{gl-domaene} zu entwickeln. Durch die verschiedenen Geschäftsdomänen, aus denen die Entwickler und die Domäneexperten stammen, müssen beide Parteien bereit sein aus den gegenseitigen Domänen kontinuierlich zu lernen und sich auf eine sprachliche Grundlage zu einigen. Diese linguistische Grundlage benennt Evans in seinem Buch als \emph{allgemeine Sprache}. Sobald Domäneexperten und Entwickler den gleichen Jargon sprechen, kann dadurch die Kommunikation fließen, wodurch Anforderungen der Domäneexperten von Entwicklern wiederum besser interpretiert werden können. Die allgemeine Sprache findet sich dabei sowohl in Unterhaltungen zwischen den Entwicklern und Experten, als auch in Dokumentationen und im Code als Klassen und Operationen wieder, wodurch sich Domänenmodell und Code ergänzen. Der Begriff des Domänenmodells wird später in diesem Unterabschnitt erläutert \parencite[S. 24--27]{evans2004domain}.
+
+    %%Strategic-Design / Problem Space
+    Nachdem eine linguistische Grundlage geschaffen wurde, kann das strategische Design genutzt werden, welches die \gls{gl-domaene} (engl. Domain) und deren \emph{Subdomänen} (engl. \emph{Subdomains}) definiert. Subdomänen bilden dabei Teilbereiche der Domäne. Wenn ein Onlineshop, wie in \autoref{fig:context_map_example} gezeigt, entwickelt werden soll, dann definiert sich die Domäne als \emph{E-Commerce System}, während Subdomänen davon \emph{Bezahlung} (engl. \emph{Purchasing}), \emph{Inventar} (engl. \emph{Inventory}), \emph{Ressourcenplanung} (engl. \emph{Ressource Planning}) und \emph{Optimale Akquisition} (engl. \emph{Optimal Acquisition}) sind. Subdomänen werden dabei in \emph{Kerndomäne} (engl. \emph{Core Domain}), \emph{unterstützende Subdomänen} (engl. \emph{Supporting Subdomains}) und \emph{generische Subdomänen} (engl. \emph{Generic Subdomains}) untergliedert. Die Domäne beschreibt den Geschäftsbereich oder den Problembereich, für den eine Software entwickelt werden soll. Die Kerndomäne ist eine Subdomäne, welche die Domäne am besten repräsentiert. Deshalb sollte in diese am meisten Arbeit fließen. In dem Beispiel des Onlineshops ist die Kerndomäne \emph{Optimale Akquisition}. unterstützende Subdomänen sind Teilbereiche, welche die Kerndomäne direkt unterstützen, allerdings nicht Teil derer sind. Generische Subdomänen stellen Teilbereiche der Domäne dar, die für die generelle Geschäftslösung benötigt werden, jedoch die Kerndomäne nicht direkt unterstützen. Generische Subdomänen können oftmals extern eingekauft oder benutzt werden. Im E-Commerce System wäre \emph{Bezahlung} eine unterstützende und \emph{Ressourcenplanung} eine generische Subdomäne. Die Bezahlung eines Produktes ist für einen Onlineshop essenziell wichtig, während \emph{Ressourcenplanung} indirekt die Domäne des Onlineshops unterstützt. Die Deklaration von Subdomänen einer Domäne stellt einen sogenannten \emph{Problemraum} (engl. \emph{Problem Space}) auf \parencites[S. 402, S. 406]{evans2004domain}[S. 52,S. 56--58]{vernon2013implementing}{vernon2016domain}.
+
+    \begin{figure}[ht!]
+      \centering
+        \begin{tikzpicture}
+          \node[rounded rectangle,dashed, draw=blue, align=center, semithick] at (-1.5,-0.5) (inv) {Inventar\\(KG)};
+          \node[rounded rectangle,dashed, draw=blue, align=center, semithick] at (0,3) (acq) {Optimale\\Akquisition\\(KG)};
+          \node[rounded rectangle,dashed, draw=blue, align=center, semithick] at (5.2,0) (pur) {Bezahlung\\(KG)};
+          \node[rounded rectangle,dashed, draw=blue, align=center, semithick] at (3,-3) (erp) {ERP\\(KG)};
+          \node[rounded rectangle,dashed, draw=blue, align=center, below right= 1.8cm and -1cm of inv, semithick] (map) {Abbildung\\(KG)\\(extern)};
+          \node[] at (0,2.99) (acqH) {};
+          \node[] at (2.99,-2.99) (resH) {};
+        
+          %\draw[red] node[anchor=east, left=1.5cm]{Domäne} \convexpath{a,b,c,d}{1.4cm}{A};
+          %\draw[blue] (hullcoord1) ++(1.2,0.97cm) -- ([yshift=-1.7cm]hullcoord2) -- (midpoint1) -- (midpoint2);
+          % hullcoord depends on the \convexpath call
+          
+          \draw[blueCol, semithick] node[anchor=center,right=0.9cm of pur,align=center]{Bezahlung\\(u)} \convexpath{erp,pur}{1.5cm};
+          \draw[greenCol, semithick] node[anchor=center,align=center,below right=0.5cm and 1.5cm of erp]{Ressourcenplanung\\(g)} \convexpath{erp,resH}{1.3cm};
+          \draw[orangeCol, semithick] node[anchor=center,align=center,above right=0.3cm and 0.9cm of acq]{Optimale\\Akquisition\\(k)} \convexpath{acq,acqH}{1.5cm};
+          \draw[blackCol, semithick] node[align=center, left=1.0cm of inv]{Inventar\\(u)} \convexpath{inv,erp,map}{1.7cm};
+
+          %Domain Outline
+          \draw[redCol, semithick] node[xshift=-4.0cm, yshift=2cm, align=center]{E-Commerce\\System\\(Domäne)} \convexpath{acq,pur,erp,map,inv}{1.9cm};
+
+          \draw[semithick] (inv) -- (acq);
+          \draw[semithick] (inv) -- (map);
+          \draw[semithick] (inv) -- (erp);
+          \draw[semithick] (erp) -- (pur);
+          \draw[semithick] (pur) -- (acq);
+
+          \begin{customlegend}[legend cell align=left, %<= to align cells
+            legend entries={ % <= in the following there are the entries
+            (k) - Kern-Subdomäne,
+            (u) - unterstützende Subdomäne,
+            (g) - generische Subdomäne,
+            (KG) - Kontextgrenze,
+            Kontextgrenze-Beziehung
+            },
+            legend style={at={(4,-6)},font=\normalsize}] % <= to define position and font legend
+            % the following are the "images" and numbers in the legend
+            \addlegendimage{only marks, mark=o}
+            \addlegendimage{only marks, mark=o}
+            \addlegendimage{only marks, mark=o}
+            \addlegendimage{dashed, black}
+            \addlegendimage{line legend, black}
+          \end{customlegend}
+
+        \end{tikzpicture}
+      \caption{Beispiel einer Kontextkarte anhand eines E-Commerce Systems mit einer Domäne, unterstützenden und generischen Subdomänen, einer Kerndomäne, Kontextgrenzen und Beziehungen zwischen den Kontextgrenzen. Die Subdomänen erstrecken sich teilweise über mehrere Kontextgrenzen \parencite[S. 58]{vernon2013implementing}}
+      \label{fig:context_map_example}
+    \end{figure}
+    \clearpage
+    
+    %%Tactical-Design / Solution Space
+    Zum Überführen eines \emph{Problemraumes} in einen \emph{Lösungsraum} (engl. \emph{Solution Space}) können Subdomänen durch Kontextgrenzen voneinander sprachlich abgegrenzt werden. Wie in \autoref{fig:context_map_example} dargestellt, können Subdomänen mehrere Kontextgrenzen benutzen. Eine Kontextgrenze definiert eine linguistische Grenze zwischen Subdomänen. Der Sinn von Kontextgrenzen ist hierbei, dass bestimmte Objekte in anderen Kontexten eine unterschiedliche Bedeutung haben. In dem Beispiel des Onlineshops könnte ein \emph{Buch} für den Endnutzer ein Objekt mit Seitenzahlen und Inhalt sein, während für das System ein \emph{Buch} aus einer Identifikationsnummer, einem Preis und einer Mengenangabe besteht. Kontextgrenzen können hierbei Beziehungen untereinander haben, um zu verdeutlichen, dass diese miteinander agieren. Erstellt man ein Diagramm wie in \autoref{fig:context_map_example}, dann nennt man dieses Konstrukt eine \emph{Kontextkarte} (engl. \emph{Context Map}). Idealerweise orientiert man Subdomänen eins-zu-eins mit einer jeweiligen Kontextgrenze, sodass jede Subdomäne seine eigenen Definitionen der Objekte aufstellt und somit von anderen Subdomänen linguistisch klar getrennt ist. In einer Kontextgrenze kann man sich auf eine Darstellungsweise festlegen, welche diese repräsentiert. Die Überlappung der Subdomänen in \autoref{fig:context_map_example} ist linguistisch gemeint. Subdomänen wie \emph{Inventory}, \emph{Ressource Planning} und \emph{Purchasing} nutzen Teile derselben Kontextgrenze, bleiben allerdings technisch eigenständige Subdomänen \parencites[S. 335--337]{evans2004domain}[S. 56--57]{vernon2013implementing}.
+    
+    Im \emph{Lösungsraum} besteht eine solche Darstellung einer Kontextgrenze oft aus \emph{Entitäten} (engl. \emph{Entities}), \emph{Wertobjekten} (engl. \emph{Value Objects}), \emph{Aggregaten} (engl. \emph{Aggregates}), \emph{Diensten} (engl. \emph{Services}), \emph{Fabriken} (engl. \emph{Factories}), \emph{Depots} (engl. \emph{Repositories}) und \emph{Domänenevents} (engl. \emph{Domain Events}). Dort können die Relationen dieser Komponenten und deren Interaktionen untereinander repräsentiert werden. Dazu kann die \gls{ac-uml} oder auch freies Zeichnen zum Erstellen von verschiedenen Diagrammen verwendet werden. Es wird also nicht das Domänenmodell dargestellt, sondern oftmals Relationen von Objekten in einer gewissen Kontextgrenze. Ein Domänenmodell beschreibt Evans wie folgt: \glqq A domain model is not a particular diagram; it is the idea that the diagram is intended to convey. It is not just the knowledge in a domain expert's head; \emph{it is a rigorously organized and selective abstraction of that knowledge}\grqq{} \parencite[S. 3, S. 35--37]{evans2004domain}. Ein Domänenmodell ist also nicht nur ein Diagramm, sondern alles, was mit der Domäne in Verbindung steht. Dazu gehören zum Beispiel: Diagramme, Dokumentationen sowie Diskussionen zwischen Domäneexperten und Entwicklern.
+    
+    \emph{Entitäten} sind individuelle Domänenobjekte, die anhand eines bestimmten Parameters, zum Beispiel über eine Identifikationsnummer, genau identifiziert werden können. Diese sind meistens veränderlich, können jedoch auch unveränderlich sein. \emph{Wertobjekte} hingegen sind Objekte, die als einfache Datencontainer fungieren und unveränderlich sind. Anders als bei Entitäten kommt es dabei nicht auf die Individualität des Wertobjektes an. Domänenobjekte können, je nachdem in welcher Kontextgrenze sich diese befinden, ihre Rollen verändern. Ein \emph{Buch} könnte demnach im Kontext des \emph{Shops} eine Entität sein, da für jedes \emph{Buch} ein individueller Preis festgelegt ist. Im Kontext der \emph{Nutzung} ist ein \emph{Buch} jedoch ein Wertobjekt, welches Seiten und Inhalt besitzt. Für die Nutzung ist nicht wichtig, welches exakte \emph{Buch} genutzt wird, solange es denselben Inhalt hat. \emph{Aggregate} sind Konglomerate von Entitäten und Wertobjekten. Eine \emph{Aggregatwurzel} spiegelt dabei eine Entität wider. Ein Beispiel dafür wäre ein \emph{User-Aggregat}, das auf die Entität \emph{UserID} und das Wertobjekt \emph{E-Mail} verweist. Aggregate sollten dabei nicht weitere Aggregate abspeichern, sondern lediglich deren Attribut, womit diese identifiziert werden können. \emph{Dienste} sind Funktionen, die semantisch auf kein Aggregat oder Wertobjekt passen, jedoch für die Domäne gebraucht werden. Ein Beispiel hierfür wäre ein \emph{Authentifizierungsdienst}. Eine \emph{Fabrik} existiert, um Entitäten, Aggregate und Wertobjekte zu konstruieren. Zweck einer Fabrik ist es komplexe Objektkonstruktionen aus der Domänenlogik zu abstrahieren. Dabei muss jede Operation einer Fabrik atomar, also unabhängig von anderen Prozessen, laufen. Gleichzeitig ist eine Fabrik stark an ihre Parameter gekoppelt. Im Gegensatz zu Fabriken, wo neue Domänenobjekte erstellt werden, besitzen Depots schon vorher eine Anzahl an Objekten. Hier findet sich die Anbindung an eine Datenbank wieder. Letztlich findet man in einem Domänenmodell verschiedene \emph{Domänenevents}. Diese sind Ereignisse im System, die für die Domäneexperten von Relevanz sind. Bei dem Onlineshop-Beispiel wäre dies, wenn ein favorisiertes \emph{Buch} wieder eingelagert wurde. Durch Domänenevents können Domänenobjekte untereinander auf indirektem Weg Nachrichten übermitteln \parencites[S. 2--4, S. 89--108, S. 136--154]{evans2004domain}[S. 265--286, S.347--362, S. 389--401]{vernon2013implementing}{vernon2016domain}.
+
+    In dieser Arbeit wird ein \gls{ac-ddd}-Ansatz genutzt, um für das System mögliche Microservices zu identifizieren. Ein ausführlicheres Erläutern von DDD und die Ausführung eines Event-Storming-Workshops, um mit Domäneexperten und Entwicklern Domänenevents des Systems zu finden, würde den Rahmen dieser Arbeit überziehen und kann zeitbedingt nicht genügend ausgeführt werden, weshalb darauf verzichtet wird.

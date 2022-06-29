@@ -29,7 +29,7 @@
 
 \setsansfont{CMU Sans Serif}
 \setmainfont{CMU Serif}
-\setmonofont{JetBrainsMono}[
+\setmonofont{JetBrainsMono}[  % JetBrainsMono has to be installed for this to work
   Path,
   Extension      = .ttf,
   UprightFont    = *-Regular,
@@ -128,7 +128,7 @@
 \input{misc/glossary/_index.tex} % include all glossary entries which are being used throughout the project
 
 \begin{document}
-    \input{misc/cover/_cover.tex} % Cover of the Work (IMPORTANT: SET YOUR PERSONAL INFORMATION IN THERE)
+    \input{misc/_cover.tex} % Cover of the Work (IMPORTANT: SET YOUR PERSONAL INFORMATION IN THERE)
     \pagenumbering{roman} % Begin of Tables of Contents
     \begin{spacing}{1.15}
         \tableofcontents
@@ -140,19 +140,19 @@
 
     %%%%%%%%%%% START OF THE MAIN WORK %%%%%%%%%%%
     % In here you can include .tex files from different folders for better debugging an a little cleaner folder structure.
-    \input{chapters/index.tex}
+    \input{chapters/_index.tex}
     %%%%%%%%%%% END OF THE MAIN WORK %%%%%%%%%%%
 
     \printglossary[title=Akronyme,type=\acronymtype]  % Print all acronyms in a nice format
     \printglossary[title=Glossar]  % Print the glossary in a nice format
     \printbibliography[heading=bibintoc, title={Literaturverzeichnis}]  % Print the bibliography in a nice format
     \cleardoublepage
-    \input{misc/oath/_oath.tex} % oath which has to be hand signed
+    \input{misc/_affidavit.tex} % oath which has to be hand signed
     \newpage
     \cleardoublepage
     \appendix
     \chapter{Anhang}
     \label{apx}
     \cleardoublepage
-    \input{misc/appendix/_appendix.tex}
+    \input{misc/_appendix.tex}
 \end{document}

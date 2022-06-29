@@ -1,4 +1,5 @@
 {
+  "latex-workshop.view.pdf.internal.synctex.keybinding": "ctrl-click",
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.intellisense.package.enabled": true,
   "latex-workshop.latex.recipes": [

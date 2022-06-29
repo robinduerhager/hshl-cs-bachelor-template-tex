@@ -6,12 +6,16 @@ This project uses `XeLaTeX` which automatically sets `utf-8` as its encoding.
 If you wish to use `pdflatex` however, feel free to modify this template as you like for your own needs.
 Please keep in mind that this template is build for thesis which are written in german. Therefore the `_main.tex` file includes for example `ngerman` and german quotes for citing in its documentclass.
 There might be an english version as well in the future but for now you'd have to manually adjust this template if you want to write in a different language then german.
-#### Prerequisites
+
 1. Install [LaTeX](https://www.latex-project.org/) (The Project has been tested with [TexLive](https://tug.org/texlive/) but [MiKTex](https://miktex.org/) might be a valid option as well)
 2. Install [VSCode](https://code.visualstudio.com/)
    1. Install [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
    2. Insert the configurations from `./vscode-settings-extension.json` into your `settings.json` vscode file (`CTRL + Shift + P` / `CMD + Shift + P` -> `Preferences: Open Settings (JSON)`)
-3. Start writing your thesis :)
+3. Download this project
+4. Copy the `TEMPLATE` folder to a directory of your choice
+5. Remove any `EXAMPLE` files (in git folders only exist implicity so only when there are files in them)
+6. Change the `misc/_cover.tex` and `misc/_affidavit.tex` files
+7. Add `.tex` files with your thesis chapters into the `chapters/` directory and include them in the `chapters/_index.tex` file
 
 ## Project Structure
 

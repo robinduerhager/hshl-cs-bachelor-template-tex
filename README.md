@@ -20,7 +20,7 @@ There might be an english version as well in the future but for now you'd have t
 ╮
 ├── TEMPLATE/                       # The Folder which holds the actual Template for creating a Bachelor thesis
 ├── EXAMPLE/                        # The Folder which incorporates an example of how the template can be used
-├── .gitignore                      # When using git, this files excludes any temporary and generated TeX related files when commiting changes into a Repository
+├── .gitignore                      # When using git, this file excludes any temporary and generated TeX related files when commiting changes into a Repository
 ├── vscode-settings-extension.json  # A code snippet of useful VSCode LaTeX Workshop configurations
 ├── README.md                       # Readme, basic info for getting started
 ├── LICENSE.md                      # License for use of this project
@@ -55,6 +55,7 @@ Note that the `EXAMPLE` and `TEMPLATE` folder have the same structure. Therefore
 │  ╰── data/                # The folder which should include all of your statistical / parseable data
 ├── _main.pdf               # The output file of LaTeX
 ├── _main.tex               # The main file which LaTeX should read. All configurations of packages etc. are written down here. You main content should be stored in chapters/ though
+├── .gitignore              # When using git, this file excludes any temporary and generated TeX related files when commiting changes into a Repository
 ├── latexmkrc               # A configuration file for latexmk for also generating the glossary and acronym entries when a .tex file is saved
 ╰── literature.bib          # The file which will be read by biber to generate the bibliography of your thesis
 ```
